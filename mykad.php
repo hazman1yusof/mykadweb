@@ -24,6 +24,22 @@
         $( document ).ready(function() {
 		    comEventOccured()
 		});
+
+        var delay = ( function() {
+            var timer = 0;
+            return function(callback, ms) {
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        function refresh(){
+            $('#overlay').show();
+
+            delay(function(){
+                comEventOccured();
+            }, 100 );
+        }
     
         function comEventOccured() {
             try {
@@ -111,7 +127,8 @@
                     alert("mykadproweb message: " + strRet);
                 }
             } catch (e) {
-                    alert("mykadpro: You dont have MYKAD SDK or FT SCR2000 reader." + e.message);
+                $('#overlay').fadeOut();
+                alert("mykadpro: You dont have MYKAD SDK or FT SCR2000 reader." + e.message);
             }
         }
     </script>
@@ -203,8 +220,8 @@
             <table class="table table-striped table-hover table-bordered" style="letter-spacing: 0.3px;">
                 <tbody>
                     <tr>
-                        <th width="15%" class="warning" id="txtIDNum">IC NO</th>
-                        <td></td>
+                        <th width="15%" class="warning">IC NO</th>
+                        <td id="txtIDNum"></td>
                         <td width="25%" rowspan="6" style="text-align: center;">
 			                <span id="pic">
 				                <img width="150px" height="200px" src="photoblank.jpg" />
@@ -271,7 +288,7 @@
 
         <div class="modal-footer">
             <button id="btn_register_close" type="button" class="btn btn-default" onclick="closeWindow();return false;">Confirm</button>
-            <!-- <button id="btn_register_close" type="button" class="btn btn-default" onclick="comEventOccured()">Load MYKAD</button> -->
+            <button id="btn_register_close" type="button" class="btn btn-info" onclick="refresh()">Refresh</button>
         </div>
     </form>
 

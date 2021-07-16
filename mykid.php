@@ -22,8 +22,24 @@
         }
 
         $( document ).ready(function() {
-		    // comEventOccured()
-		});
+            comEventOccured()
+        });
+
+        var delay = ( function() {
+            var timer = 0;
+            return function(callback, ms) {
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        function refresh(){
+            $('#overlay').show();
+
+            delay(function(){
+                comEventOccured();
+            }, 100 );
+        }
     
         function comEventOccured() {
             try {
@@ -264,7 +280,7 @@
 
         <div class="modal-footer">
             <button id="btn_register_close" type="button" class="btn btn-default" onclick="closeWindow();return false;">Confirm</button>
-            <!-- <button id="btn_register_close" type="button" class="btn btn-default" onclick="comEventOccured()">Load MYKAD</button> -->
+            <button id="btn_register_close" type="button" class="btn btn-info" onclick="refresh()">Refresh</button>
         </div>
     </form>
 
