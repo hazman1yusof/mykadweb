@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>MYKADPro</title>
+
+    <script type="text/javascript">
+	
+        function comEventOccured(myform) {
+            try {
+                var oMYKAD = new ActiveXObject("mykadproweb.mykadproweb.jpn");
+                var strRet = oMYKAD.BeginJPN("Feitian SCR301 0");
+                if (strRet == "0") {
+                    document.forms[0].txtIDNum.value = oMYKAD.getIDNum();
+                    document.forms[0].txtBirthDate.value = oMYKAD.getBirthDate();
+                    document.forms[0].txtKPTName.value = oMYKAD.getKPTName();
+                    document.forms[0].txtOldIDNum.value = oMYKAD.getOldIDNum();
+                    document.forms[0].txtReligion.value = oMYKAD.getReligion();
+                    document.forms[0].txtGender.value = oMYKAD.getGender();
+                    document.forms[0].txtRace.value = oMYKAD.getRace();
+                    document.forms[0].txtAddress1.value = oMYKAD.getAddress1();
+					document.forms[0].txtAddress2.value = oMYKAD.getAddress2();
+					document.forms[0].txtAddress3.value = oMYKAD.getAddress3();
+					document.forms[0].txtPostcode.value = oMYKAD.getPostcode();
+					document.forms[0].txtCity.value = oMYKAD.getCity();
+					document.forms[0].txtState.value = oMYKAD.getState();
+					document.forms[0].txtAddress.value = oMYKAD.getAddress();
+					strRet=oMYKAD.getPhoto("c:\\MYKADSDKWEB\\myphotov1.jpg");
+					
+					//load image
+					//var file_location = document.getElementById('show_pic');
+					//file_location.innerHTML='<img src="c:\\MYKADSDKWEB\\myphotov1.jpg" width="150px" height="200px"></img>';
+
+					//load image base64
+                    strRet = oMYKAD.getPhotoBase64String();
+                    var src = "data:image/jpeg;base64,";
+                    src += strRet;
+                    var newImage = document.createElement('img');
+                    newImage.src = src;
+
+                    newImage.width = "150";
+                    newImage.height = "200";
+
+                    var file_location = document.getElementById('show_pic');
+                    file_location.innerHTML = newImage.outerHTML;
+					
+                    oMYKAD.EndJPN();
+                }
+                else {
+                    alert("mykadproweb message: " + strRet);
+                }
+            } catch (e) {
+                    alert("mykadpro: You dont have MYKAD SDK or FT SCR2000 reader." + e.message);
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <h1>
+		
+    <form id="myform" action="" method="post">
+    <p>
+        <table border="0" width="50%" style="float: left; font-family: 'Helvetica', Arial, Verdana;
+            font-size: 12px;">
+			<tr>
+				<td colspan="2" valign=middle style='border: 1 solid #dfdfdf;' id='show_pic'>
+				<img width="150px" height="200px" src='photoblank.jpg'></img>
+				</td>
+			</tr>
+            <tr>
+                <td>
+                    IC NO:
+                </td>
+                <td>
+                    <input id="txtIDNum" type="text" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    DOB:
+                </td>
+                <td>
+                    <input id="txtBirthDate" type="text" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    NAME:
+                </td>
+                <td>
+                    <input id="txtKPTName" type="text" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    OLD IC NO:
+                </td>
+                <td>
+                    <input id="txtOldIDNum" type="text" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    RELIGION:
+                </td>
+                <td>
+                    <input id="txtReligion" type="text" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    GENDER:
+                </td>
+                <td>
+                    <input id="txtGender" type="text" size="50" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    RACE:
+                </td>
+                <td>
+                    <input id="txtRace" type="text" size="50" />
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    ADDRESS1:
+                </td>
+                <td>
+                    <input id="txtAddress1" type="text" size="50" />
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    ADDRESS2:
+                </td>
+                <td>
+                    <input id="txtAddress2" type="text" size="50" />
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    ADDRESS3:
+                </td>
+                <td>
+                    <input id="txtAddress3" type="text" size="50" />
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    POSTCODE:
+                </td>
+                <td>
+                    <input id="txtPostcode" type="text" size="50" />
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    CITY:
+                </td>
+                <td>
+                    <input id="txtCity" type="text" size="50" />
+                </td>
+            </tr>
+			<tr>
+                <td>
+                    STATE:
+                </td>
+                <td>
+                    <input id="txtState" type="text" size="50" />
+                </td>
+            </tr>
+			
+            <tr>
+                <td>
+                    FULL ADDRESS:
+                </td>
+                <td>
+                    <textarea id="txtAddress" rows="5" cols="50"> </textarea>
+                </td>
+            </tr>
+			
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="button" value="Load MYKAD" onclick="comEventOccured(myform)" id="submit_"/>
+                    
+                </td>
+            </tr>
+        </table>
+    </p>
+    </form>
+</body>
+</html>
