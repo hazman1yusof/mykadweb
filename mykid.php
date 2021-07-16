@@ -22,22 +22,22 @@
         }
 
         $( document ).ready(function() {
-		    comEventOccured()
+		    // comEventOccured()
 		});
     
         function comEventOccured() {
             try {
-                var oMYKAD = new ActiveXObject("mykadproweb.mykadproweb.jpn");
+                var oMYKAD = new ActiveXObject("mykidproweb.mykidproweb.jpn");
                 var strRet = oMYKAD.BeginJPN("Feitian SCR301 0");
                 if (strRet == "0") {
 
                 	$('#txtIDNum').text(oMYKAD.getIDNum())
                     $('#txtBirthDate').text(oMYKAD.getBirthDate())
-                    $('#txtKPTName').text(oMYKAD.getKPTName())
+                    $('#txtBirthPlace').text(oMYKAD.getBirthPlace())
+                    $('#txtGMPCName').text(oMYKAD.getGMPCName())
                     $('#txtOldIDNum').text(oMYKAD.getOldIDNum())
                     $('#txtReligion').text(oMYKAD.getReligion())
                     $('#txtGender').text(oMYKAD.getGender())
-                    $('#txtRace').text(oMYKAD.getRace())
                     $('#txtAddress1').text(oMYKAD.getAddress1())
                     $('#txtAddress2').text(oMYKAD.getAddress2())
                     $('#txtAddress3').text(oMYKAD.getAddress3())
@@ -48,7 +48,7 @@
 
                     // document.forms[0].txtIDNum.value = oMYKAD.getIDNum();
                     // document.forms[0].txtBirthDate.value = oMYKAD.getBirthDate();
-                    // document.forms[0].txtKPTName.value = oMYKAD.getKPTName();
+                    // document.forms[0].txtGMPCName.value = oMYKAD.getKPTName();
                     // document.forms[0].txtOldIDNum.value = oMYKAD.getOldIDNum();
                     // document.forms[0].txtReligion.value = oMYKAD.getReligion();
                     // document.forms[0].txtGender.value = oMYKAD.getGender();
@@ -82,16 +82,15 @@
                     file_location.innerHTML = newImage.outerHTML;
                     
                     oMYKAD.EndJPN();
-   					$('#overlay').fadeOut();
 
                     var objdata = {
+                        'type' : 'mykid',
                         'txtIDNum' : $('#txtIDNum').text(),
                         'txtBirthDate' : $('#txtBirthDate').text(),
-                        'txtKPTName' : $('#txtKPTName').text(),
-                        'txtOldIDNum' : $('#txtOldIDNum').text(),
+                        'txtBirthPlace' : $('#txtBirthPlace').text(),
+                        'txtGMPCName' : $('#txtGMPCName').text(),
                         'txtReligion' : $('#txtReligion').text(),
                         'txtGender' : $('#txtGender').text(),
-                        'txtRace' : $('#txtRace').text(),
                         'txtAddress1' : $('#txtAddress1').text(),
                         'txtAddress2' : $('#txtAddress2').text(),
                         'txtAddress3' : $('#txtAddress3').text(),
@@ -103,7 +102,7 @@
                     }
 
                     $.post( "./store.php",objdata, function( data ) {
-                        console.log(data);
+                        $('#overlay').fadeOut();
                     });
 
                 }
@@ -191,12 +190,12 @@
 
 <body class="header-fixed">
 	<div id="overlay">
-		  <div id="progstat">Reading Mykad ... </div>
+		  <div id="progstat">Reading Mykid ... </div>
 	</div>
 	<form class="form-horizontal" id="myform" style="padding: 1em 3em 1em 3em; width: 70%; margin: auto" >
         <div class="modal-content" >
             <div class="modal-header label-warning" style="padding: 1em 3em 1em 3em">
-                <b style="font-size: 14px;color: white;letter-spacing: 0.5px;">MyKad Reader</b>
+                <b style="font-size: 14px;color: white;letter-spacing: 0.5px;">MyKid Reader</b>
             </div>
 
             <div class="panel panel-default" style="margin: 1em 3em 1em 3em">
@@ -205,12 +204,6 @@
                     <tr>
                         <th width="15%" class="warning">IC NO</th>
                         <td id="txtIDNum"></td>
-                        <td width="25%" rowspan="6" style="text-align: center;">
-			                <span id="pic">
-				                <img width="150px" height="200px" src="photoblank.jpg" />
-				            </span>
-            				<input type="hidden" name="base64" id="base64" >
-                        </td>
                     </tr>
                     <tr>
                         <th class="warning" >DOB</th>
@@ -218,7 +211,7 @@
                     </tr>
                     <tr>
                         <th class="warning">NAME</th>
-                        <td id="txtKPTName"></td>
+                        <td id="txtGMPCName"></td>
                     </tr>
                     <tr>
                         <th class="warning">OLD IC NO</th>
@@ -233,36 +226,36 @@
                         <td id="txtGender"></td>
                     </tr>
                     <tr>
-                        <th class="warning">RACE</th>
-                        <td colspan="2" id="txtRace"></td>
+                        <th class="warning">BIRTH PLACE</th>
+                        <td id="txtBirthPlace"></td>
                     </tr>
                     <tr>
                         <th class="warning">ADDRESS 1</th>
-                        <td colspan="2" id="txtAddress1"></td>
+                        <td id="txtAddress1"></td>
                     </tr>
                     <tr>
                         <th class="warning">ADDRESS 2</th>
-                        <td colspan="2" id="txtAddress2"></td>
+                        <td id="txtAddress2"></td>
                     </tr>
                     <tr>
                         <th class="warning">ADDRESS 3</th>
-                        <td colspan="2" id="txtAddress3"></td>
+                        <td id="txtAddress3"></td>
                     </tr>
                     <tr>
                         <th class="warning">POSTCODE</th>
-                        <td colspan="2" id="txtPostcode"></td>
+                        <td id="txtPostcode"></td>
                     </tr>
                     <tr>
                         <th class="warning">CITY</th>
-                        <td colspan="2" id="txtCity"></td>
+                        <td id="txtCity"></td>
                     </tr>
                     <tr>
                         <th class="warning">STATE</th>
-                        <td colspan="2" id="txtState"></td>
+                        <td id="txtState"></td>
                     </tr>
                     <tr>
                         <th class="warning">FULL ADDRESS</th>
-                        <td colspan="2" id="txtAddress"></td>
+                        <td id="txtAddress"></td>
                     </tr>
                 </tbody>
             </table>

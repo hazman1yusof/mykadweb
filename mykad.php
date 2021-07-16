@@ -82,9 +82,9 @@
                     file_location.innerHTML = newImage.outerHTML;
                     
                     oMYKAD.EndJPN();
-   					$('#overlay').fadeOut();
 
                     var objdata = {
+                        'type' : 'mykad',
                         'txtIDNum' : $('#txtIDNum').text(),
                         'txtBirthDate' : $('#txtBirthDate').text(),
                         'txtKPTName' : $('#txtKPTName').text(),
@@ -103,7 +103,7 @@
                     }
 
                     $.post( "./store.php",objdata, function( data ) {
-                        console.log(data);
+                        $('#overlay').fadeOut();
                     });
 
                 }
