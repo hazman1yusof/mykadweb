@@ -62,6 +62,21 @@
                     $('#txtState').text(oMYKAD.getState())
                     $('#txtAddress').text(oMYKAD.getAddress())
 
+                    $('#txtIDNum_inp').val(oMYKAD.getIDNum())
+                    $('#txtBirthDate_inp').val(oMYKAD.getBirthDate())
+                    $('#txtKPTName_inp').val(oMYKAD.getKPTName())
+                    $('#txtOldIDNum_inp').val(oMYKAD.getOldIDNum())
+                    $('#txtReligion_inp').val(oMYKAD.getReligion())
+                    $('#txtGender_inp').val(oMYKAD.getGender())
+                    $('#txtRace_inp').val(oMYKAD.getRace())
+                    $('#txtAddress1_inp').val(oMYKAD.getAddress1())
+                    $('#txtAddress2_inp').val(oMYKAD.getAddress2())
+                    $('#txtAddress3_inp').val(oMYKAD.getAddress3())
+                    $('#txtPostcode_inp').val(oMYKAD.getPostcode())
+                    $('#txtCity_inp').val(oMYKAD.getCity())
+                    $('#txtState_inp').val(oMYKAD.getState())
+                    $('#txtAddress_inp').val(oMYKAD.getAddress())
+
                     // document.forms[0].txtIDNum.value = oMYKAD.getIDNum();
                     // document.forms[0].txtBirthDate.value = oMYKAD.getBirthDate();
                     // document.forms[0].txtKPTName.value = oMYKAD.getKPTName();
@@ -87,40 +102,44 @@
                     base64 = strRet;
                     var src = "data:image/jpeg;base64,";
                     src += strRet;
-                    var newImage = document.createElement('img');
-                    newImage.src = src;
 
-                    newImage.width = "150";
-                    newImage.height = "200";
-                    newImage.style = "margin: 15px; border: 1px solid grey;";
+                    $('#mypic').attr('src',src);
+                    // var newImage = document.createElement('img');
+                    // newImage.src = src;
 
-                    var file_location = document.getElementById('pic');
-                    file_location.innerHTML = newImage.outerHTML;
+                    // newImage.width = "150";
+                    // newImage.height = "200";
+                    // newImage.style = "margin: 15px; border: 1px solid grey;";
+
+                    // var file_location = document.getElementById('pic');
+                    // file_location.innerHTML = newImage.outerHTML;
                     
                     oMYKAD.EndJPN();
 
-                    var objdata = {
-                        'type' : 'mykad',
-                        'txtIDNum' : $('#txtIDNum').text(),
-                        'txtBirthDate' : $('#txtBirthDate').text(),
-                        'txtKPTName' : $('#txtKPTName').text(),
-                        'txtOldIDNum' : $('#txtOldIDNum').text(),
-                        'txtReligion' : $('#txtReligion').text(),
-                        'txtGender' : $('#txtGender').text(),
-                        'txtRace' : $('#txtRace').text(),
-                        'txtAddress1' : $('#txtAddress1').text(),
-                        'txtAddress2' : $('#txtAddress2').text(),
-                        'txtAddress3' : $('#txtAddress3').text(),
-                        'txtPostcode' : $('#txtPostcode').text(),
-                        'txtCity' : $('#txtCity').text(),
-                        'txtState' : $('#txtState').text(),
-                        'txtAddress' : $('#txtAddress').text(),
-                        'base64' : base64
-                    }
+                    $("#btn_register_s").click();
 
-                    $.post( "./store.php",objdata, function( data ) {
-                        $('#overlay').fadeOut();
-                    });
+                    // var objdata = {
+                    //     'type' : 'mykad',
+                    //     'txtIDNum' : $('#txtIDNum').text(),
+                    //     'txtBirthDate' : $('#txtBirthDate').text(),
+                    //     'txtKPTName' : $('#txtKPTName').text(),
+                    //     'txtOldIDNum' : $('#txtOldIDNum').text(),
+                    //     'txtReligion' : $('#txtReligion').text(),
+                    //     'txtGender' : $('#txtGender').text(),
+                    //     'txtRace' : $('#txtRace').text(),
+                    //     'txtAddress1' : $('#txtAddress1').text(),
+                    //     'txtAddress2' : $('#txtAddress2').text(),
+                    //     'txtAddress3' : $('#txtAddress3').text(),
+                    //     'txtPostcode' : $('#txtPostcode').text(),
+                    //     'txtCity' : $('#txtCity').text(),
+                    //     'txtState' : $('#txtState').text(),
+                    //     'txtAddress' : $('#txtAddress').text(),
+                    //     'base64' : base64
+                    // }
+
+                    // $.post( "./store.php",objdata, function( data ) {
+                    //     $('#overlay').fadeOut();
+                    // });
 
                 }
                 else {
@@ -210,7 +229,7 @@
 	<div id="overlay">
 		  <div id="progstat">Reading Mykad ... </div>
 	</div>
-	<form class="form-horizontal" id="myform" style="padding: 1em 3em 1em 3em; width: 70%; margin: auto" >
+	<form class="form-horizontal" id="myform" style="padding: 1em 3em 1em 3em; width: 70%; margin: auto"  action="./store.php" method="post">
         <div class="modal-content" >
             <div class="modal-header label-warning" style="padding: 1em 3em 1em 3em">
                 <b style="font-size: 14px;color: white;letter-spacing: 0.5px;">MyKad Reader</b>
@@ -224,7 +243,7 @@
                         <td id="txtIDNum"></td>
                         <td width="25%" rowspan="6" style="text-align: center;">
 			                <span id="pic">
-				                <img width="150px" height="200px" src="photoblank.jpg" />
+				                <img id="mypic" width="150px" height="200px" src="photoblank.jpg" />
 				            </span>
             				<input type="hidden" name="base64" id="base64" >
                         </td>
@@ -286,9 +305,25 @@
             </div>
         </div>
 
+        <input type="hidden" name="txtIDNum" id="txtIDNum_inp"> 
+        <input type="hidden" name="txtBirthDate" id="txtBirthDate_inp"> 
+        <input type="hidden" name="txtKPTName" id="txtKPTName_inp"> 
+        <input type="hidden" name="txtOldIDNum" id="txtOldIDNum_inp"> 
+        <input type="hidden" name="txtReligion" id="txtReligion_inp"> 
+        <input type="hidden" name="txtGender" id="txtGender_inp"> 
+        <input type="hidden" name="txtRace" id="txtRace_inp"> 
+        <input type="hidden" name="txtAddress1" id="txtAddress1_inp"> 
+        <input type="hidden" name="txtAddress2" id="txtAddress2_inp"> 
+        <input type="hidden" name="txtAddress3" id="txtAddress3_inp"> 
+        <input type="hidden" name="txtPostcode" id="txtPostcode_inp"> 
+        <input type="hidden" name="txtCity" id="txtCity_inp"> 
+        <input type="hidden" name="txtState" id="txtState_inp"> 
+        <input type="hidden" name="txtAddressp" id="txtAddress_inp"> 
+
         <div class="modal-footer">
             <button id="btn_register_close" type="button" class="btn btn-default" onclick="closeWindow();return false;">Confirm</button>
-            <button id="btn_register_close" type="button" class="btn btn-info" onclick="refresh()">Refresh</button>
+            <button id="btn_register_r" type="button" class="btn btn-info" onclick="refresh()">Refresh</button>
+            <button id="btn_register_s" type="submit" class="btn btn-info" style="display:none;">Refresh</button>
         </div>
     </form>
 
