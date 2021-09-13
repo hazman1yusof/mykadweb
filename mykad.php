@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css">
 
-	<script type="text/ecmascript" src="jquery-3.2.1.min.js"></script> 
+	<script type="text/ecmascript" src="jq1.min.js"></script> 
 	<script type="text/ecmascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
@@ -49,8 +49,8 @@
 
                 	$('#txtIDNum').text(oMYKAD.getIDNum())
                     $('#txtBirthDate').text(oMYKAD.getBirthDate())
-                    $('#txtKPTName').text(oMYKAD.getKPTName())
-                    $('#txtOldIDNum').text(oMYKAD.getOldIDNum())
+                    $('#txtKPTName').text(oMYKAD.getGMPCName())
+                    //$('#txtOldIDNum').text(oMYKAD.getOldIDNum())
                     $('#txtReligion').text(oMYKAD.getReligion())
                     $('#txtGender').text(oMYKAD.getGender())
                     $('#txtRace').text(oMYKAD.getRace())
@@ -64,8 +64,8 @@
 
                     $('#txtIDNum_inp').val(oMYKAD.getIDNum())
                     $('#txtBirthDate_inp').val(oMYKAD.getBirthDate())
-                    $('#txtKPTName_inp').val(oMYKAD.getKPTName())
-                    $('#txtOldIDNum_inp').val(oMYKAD.getOldIDNum())
+                    $('#txtKPTName_inp').val(oMYKAD.getGMPCName())
+                    //$('#txtOldIDNum_inp').val(oMYKAD.getOldIDNum())
                     $('#txtReligion_inp').val(oMYKAD.getReligion())
                     $('#txtGender_inp').val(oMYKAD.getGender())
                     $('#txtRace_inp').val(oMYKAD.getRace())
@@ -102,6 +102,7 @@
                     base64 = strRet;
                     var src = "data:image/jpeg;base64,";
                     src += strRet;
+                    $('#base64').val(strRet)
 
                     $('#mypic').attr('src',src);
                     // var newImage = document.createElement('img');
@@ -147,7 +148,7 @@
                 }
             } catch (e) {
                 $('#overlay').fadeOut();
-                alert("mykadpro: You dont have MYKAD SDK or FT SCR2000 reader." + e.message);
+                //alert("mykadpro: You dont have MYKAD SDK or FT SCR2000 reader." + e.message);
             }
         }
     </script>
@@ -230,6 +231,7 @@
 		  <div id="progstat">Reading Mykad ... </div>
 	</div>
 	<form class="form-horizontal" id="myform" style="padding: 1em 3em 1em 3em; width: 70%; margin: auto"  action="./store.php" method="post">
+	
         <div class="modal-content" >
             <div class="modal-header label-warning" style="padding: 1em 3em 1em 3em">
                 <b style="font-size: 14px;color: white;letter-spacing: 0.5px;">MyKad Reader</b>
@@ -304,7 +306,8 @@
             </table>
             </div>
         </div>
-
+	
+        <input type="hidden" name="type" id="type" value="mykad">
         <input type="hidden" name="txtIDNum" id="txtIDNum_inp"> 
         <input type="hidden" name="txtBirthDate" id="txtBirthDate_inp"> 
         <input type="hidden" name="txtKPTName" id="txtKPTName_inp"> 
@@ -321,9 +324,8 @@
         <input type="hidden" name="txtAddressp" id="txtAddress_inp"> 
 
         <div class="modal-footer">
-            <button id="btn_register_close" type="button" class="btn btn-default" onclick="closeWindow();return false;">Confirm</button>
-            <button id="btn_register_r" type="button" class="btn btn-info" onclick="refresh()">Refresh</button>
-            <button id="btn_register_s" type="submit" class="btn btn-info" style="display:none;">Refresh</button>
+            <button id="btn_register_r" type="button" class="btn btn-default" onclick="refresh()">Refresh</button>
+            <button id="btn_register_s" type="submit" class="btn btn-info" style="">submit</button>
         </div>
     </form>
 

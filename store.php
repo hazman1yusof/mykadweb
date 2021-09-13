@@ -53,3 +53,4 @@
 	}
 
 ?>
+<script type="text/javascript">setTimeout("window.close();", 3000);</script>
