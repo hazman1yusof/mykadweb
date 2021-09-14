@@ -46,10 +46,6 @@
 
 		fwrite($myfile, $txt);
 		fclose($myfile);
-
-		$data = base64_decode($_POST['base64']);
-
-		file_put_contents('C:\cmas\mykad\mykidweb\myphotov1.jpg', $data);
 	}
 
 ?>

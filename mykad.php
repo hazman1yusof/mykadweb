@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css">
 
-	<script type="text/ecmascript" src="jq1.min.js"></script> 
+	<script type="text/ecmascript" src="jquery-3.2.1.min.js"></script> 
 	<script type="text/ecmascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
@@ -22,7 +22,11 @@
         }
 
         $( document ).ready(function() {
-		    comEventOccured()
+
+            delay(function(){
+                comEventOccured();
+            }, 500 );
+
 		});
 
         var delay = ( function() {
@@ -38,7 +42,7 @@
 
             delay(function(){
                 comEventOccured();
-            }, 100 );
+            }, 500 );
         }
     
         function comEventOccured() {
@@ -50,7 +54,6 @@
                 	$('#txtIDNum').text(oMYKAD.getIDNum())
                     $('#txtBirthDate').text(oMYKAD.getBirthDate())
                     $('#txtKPTName').text(oMYKAD.getGMPCName())
-                    //$('#txtOldIDNum').text(oMYKAD.getOldIDNum())
                     $('#txtReligion').text(oMYKAD.getReligion())
                     $('#txtGender').text(oMYKAD.getGender())
                     $('#txtRace').text(oMYKAD.getRace())
@@ -65,7 +68,6 @@
                     $('#txtIDNum_inp').val(oMYKAD.getIDNum())
                     $('#txtBirthDate_inp').val(oMYKAD.getBirthDate())
                     $('#txtKPTName_inp').val(oMYKAD.getGMPCName())
-                    //$('#txtOldIDNum_inp').val(oMYKAD.getOldIDNum())
                     $('#txtReligion_inp').val(oMYKAD.getReligion())
                     $('#txtGender_inp').val(oMYKAD.getGender())
                     $('#txtRace_inp').val(oMYKAD.getRace())
@@ -77,26 +79,6 @@
                     $('#txtState_inp').val(oMYKAD.getState())
                     $('#txtAddress_inp').val(oMYKAD.getAddress())
 
-                    // document.forms[0].txtIDNum.value = oMYKAD.getIDNum();
-                    // document.forms[0].txtBirthDate.value = oMYKAD.getBirthDate();
-                    // document.forms[0].txtKPTName.value = oMYKAD.getKPTName();
-                    // document.forms[0].txtOldIDNum.value = oMYKAD.getOldIDNum();
-                    // document.forms[0].txtReligion.value = oMYKAD.getReligion();
-                    // document.forms[0].txtGender.value = oMYKAD.getGender();
-                    // document.forms[0].txtRace.value = oMYKAD.getRace();
-                    // document.forms[0].txtAddress1.value = oMYKAD.getAddress1();
-                    // document.forms[0].txtAddress2.value = oMYKAD.getAddress2();
-                    // document.forms[0].txtAddress3.value = oMYKAD.getAddress3();
-                    // document.forms[0].txtPostcode.value = oMYKAD.getPostcode();
-                    // document.forms[0].txtCity.value = oMYKAD.getCity();
-                    // document.forms[0].txtState.value = oMYKAD.getState();
-                    // document.forms[0].txtAddress.value = oMYKAD.getAddress();
-                    // strRet=oMYKAD.getPhoto("c:\\MYKADSDKWEB\\myphotov1.jpg");
-                    
-                    //load image
-                    //var file_location = document.getElementById('show_pic');
-                    //file_location.innerHTML='<img src="c:\\MYKADSDKWEB\\myphotov1.jpg" width="150px" height="200px"></img>';
-
                     //load image base64
                     strRet = oMYKAD.getPhotoBase64String();
                     base64 = strRet;
@@ -105,42 +87,33 @@
                     $('#base64').val(strRet)
 
                     $('#mypic').attr('src',src);
-                    // var newImage = document.createElement('img');
-                    // newImage.src = src;
-
-                    // newImage.width = "150";
-                    // newImage.height = "200";
-                    // newImage.style = "margin: 15px; border: 1px solid grey;";
-
-                    // var file_location = document.getElementById('pic');
-                    // file_location.innerHTML = newImage.outerHTML;
                     
                     oMYKAD.EndJPN();
 
-                    $("#btn_register_s").click();
+                    // $("#btn_register_s").click();
 
-                    // var objdata = {
-                    //     'type' : 'mykad',
-                    //     'txtIDNum' : $('#txtIDNum').text(),
-                    //     'txtBirthDate' : $('#txtBirthDate').text(),
-                    //     'txtKPTName' : $('#txtKPTName').text(),
-                    //     'txtOldIDNum' : $('#txtOldIDNum').text(),
-                    //     'txtReligion' : $('#txtReligion').text(),
-                    //     'txtGender' : $('#txtGender').text(),
-                    //     'txtRace' : $('#txtRace').text(),
-                    //     'txtAddress1' : $('#txtAddress1').text(),
-                    //     'txtAddress2' : $('#txtAddress2').text(),
-                    //     'txtAddress3' : $('#txtAddress3').text(),
-                    //     'txtPostcode' : $('#txtPostcode').text(),
-                    //     'txtCity' : $('#txtCity').text(),
-                    //     'txtState' : $('#txtState').text(),
-                    //     'txtAddress' : $('#txtAddress').text(),
-                    //     'base64' : base64
-                    // }
+                    var objdata = {
+                        'type' : 'mykad',
+                        'txtIDNum' : $('#txtIDNum').text().replace(/[^0-9]/g, ''),
+                        'txtBirthDate' : $('#txtBirthDate').text(),
+                        'txtKPTName' : $('#txtKPTName').text(),
+                        'txtOldIDNum' : $('#txtOldIDNum').text(),
+                        'txtReligion' : $('#txtReligion').text(),
+                        'txtGender' : $('#txtGender').text(),
+                        'txtRace' : $('#txtRace').text(),
+                        'txtAddress1' : $('#txtAddress1').text(),
+                        'txtAddress2' : $('#txtAddress2').text(),
+                        'txtAddress3' : $('#txtAddress3').text(),
+                        'txtPostcode' : $('#txtPostcode').text(),
+                        'txtCity' : $('#txtCity').text(),
+                        'txtState' : $('#txtState').text(),
+                        'txtAddress' : $('#txtAddress').text(),
+                        'base64' : base64
+                    }
 
-                    // $.post( "./store.php",objdata, function( data ) {
-                    //     $('#overlay').fadeOut();
-                    // });
+                    $.post( "./store.php",objdata, function( data ) {
+                        $('#overlay').fadeOut();
+                    });
 
                 }
                 else {
@@ -325,7 +298,8 @@
 
         <div class="modal-footer">
             <button id="btn_register_r" type="button" class="btn btn-default" onclick="refresh()">Refresh</button>
-            <button id="btn_register_s" type="submit" class="btn btn-info" style="">submit</button>
+            <!-- <button id="btn_register_s" type="submit" class="btn btn-info" style="">submit</button> -->
+            <button id="btn_done" type="button" class="btn btn-info" style="" onclick="closeWindow();return false;">Confirm</button>
         </div>
     </form>
 

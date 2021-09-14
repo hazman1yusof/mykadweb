@@ -22,7 +22,11 @@
         }
 
         $( document ).ready(function() {
-            comEventOccured()
+
+            delay(function(){
+                comEventOccured();
+            }, 500 );
+            
         });
 
         var delay = ( function() {
@@ -51,7 +55,6 @@
                     $('#txtBirthDate').text(oMYKAD.getBirthDate())
                     $('#txtBirthPlace').text(oMYKAD.getBirthPlace())
                     $('#txtGMPCName').text(oMYKAD.getGMPCName())
-                    // $('#txtOldIDNum').text(oMYKAD.getOldIDNum())
                     $('#txtReligion').text(oMYKAD.getReligion())
                     $('#txtGender').text(oMYKAD.getGender())
                     $('#txtAddress1').text(oMYKAD.getAddress1())
@@ -60,48 +63,12 @@
                     $('#txtPostcode').text(oMYKAD.getPostcode())
                     $('#txtCity').text(oMYKAD.getCity())
                     $('#txtState').text(oMYKAD.getState())
-                    $('#txtAddress').text(oMYKAD.getAddress())
-
-                    // document.forms[0].txtIDNum.value = oMYKAD.getIDNum();
-                    // document.forms[0].txtBirthDate.value = oMYKAD.getBirthDate();
-                    // document.forms[0].txtGMPCName.value = oMYKAD.getKPTName();
-                    // document.forms[0].txtOldIDNum.value = oMYKAD.getOldIDNum();
-                    // document.forms[0].txtReligion.value = oMYKAD.getReligion();
-                    // document.forms[0].txtGender.value = oMYKAD.getGender();
-                    // document.forms[0].txtRace.value = oMYKAD.getRace();
-                    // document.forms[0].txtAddress1.value = oMYKAD.getAddress1();
-                    // document.forms[0].txtAddress2.value = oMYKAD.getAddress2();
-                    // document.forms[0].txtAddress3.value = oMYKAD.getAddress3();
-                    // document.forms[0].txtPostcode.value = oMYKAD.getPostcode();
-                    // document.forms[0].txtCity.value = oMYKAD.getCity();
-                    // document.forms[0].txtState.value = oMYKAD.getState();
-                    // document.forms[0].txtAddress.value = oMYKAD.getAddress();
-                    // strRet=oMYKAD.getPhoto("c:\\MYKADSDKWEB\\myphotov1.jpg");
-                    
-                    //load image
-                    //var file_location = document.getElementById('show_pic');
-                    //file_location.innerHTML='<img src="c:\\MYKADSDKWEB\\myphotov1.jpg" width="150px" height="200px"></img>';
-
-                    //load image base64
-                    strRet = oMYKAD.getPhotoBase64String();
-                    base64 = strRet;
-                    var src = "data:image/jpeg;base64,";
-                    src += strRet;
-                    var newImage = document.createElement('img');
-                    newImage.src = src;
-
-                    newImage.width = "150";
-                    newImage.height = "200";
-                    newImage.style = "margin: 15px; border: 1px solid grey;";
-
-                    var file_location = document.getElementById('pic');
-                    file_location.innerHTML = newImage.outerHTML;
                     
                     oMYKAD.EndJPN();
 
                     var objdata = {
                         'type' : 'mykid',
-                        'txtIDNum' : $('#txtIDNum').text(),
+                        'txtIDNum' : $('#txtIDNum').text().replace(/[^0-9]/g, ''),
                         'txtBirthDate' : $('#txtBirthDate').text(),
                         'txtBirthPlace' : $('#txtBirthPlace').text(),
                         'txtGMPCName' : $('#txtGMPCName').text(),
@@ -113,8 +80,6 @@
                         'txtPostcode' : $('#txtPostcode').text(),
                         'txtCity' : $('#txtCity').text(),
                         'txtState' : $('#txtState').text(),
-                        'txtAddress' : $('#txtAddress').text(),
-                        'base64' : base64
                     }
 
                     $.post( "./store.php",objdata, function( data ) {
@@ -279,8 +244,8 @@
         </div>
 
         <div class="modal-footer">
-            <button id="btn_register_close" type="button" class="btn btn-default" onclick="closeWindow();return false;">Confirm</button>
             <button id="btn_register_close" type="button" class="btn btn-info" onclick="refresh()">Refresh</button>
+            <button id="btn_register_close" type="button" class="btn btn-default" onclick="closeWindow();return false;">Confirm</button>
         </div>
     </form>
 
