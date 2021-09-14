@@ -51,7 +51,7 @@
                     $('#txtBirthDate').text(oMYKAD.getBirthDate())
                     $('#txtBirthPlace').text(oMYKAD.getBirthPlace())
                     $('#txtGMPCName').text(oMYKAD.getGMPCName())
-                    $('#txtOldIDNum').text(oMYKAD.getOldIDNum())
+                    // $('#txtOldIDNum').text(oMYKAD.getOldIDNum())
                     $('#txtReligion').text(oMYKAD.getReligion())
                     $('#txtGender').text(oMYKAD.getGender())
                     $('#txtAddress1').text(oMYKAD.getAddress1())
